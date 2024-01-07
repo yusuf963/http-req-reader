@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "baseUrl": "",
-    "noErrorTruncation": true,
-    "target": "es2017",
-    "outDir": "dist",
-    "sourceMap": false,
-    "moduleResolution": "node",
-    "allowJs": false,
-    "lib": ["ESNext"],
-    "noUnusedLocals": true,
-    "declaration": true,
-    "declarationDir": "dist/@types",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", "dist"]
+	"compilerOptions": {
+		"baseUrl": "",
+		"noErrorTruncation": true,
+		"target": "es2017",
+		"outDir": "dist",
+		"sourceMap": false,
+		"moduleResolution": "node",
+		"allowJs": false,
+		"lib": ["ESNext"],
+		"noUnusedLocals": true,
+		"declaration": true,
+		"declarationDir": "dist/@types",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules", "dist"]
 }
