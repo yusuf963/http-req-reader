@@ -3,9 +3,22 @@
   "version": "0.0.1",
   "description": "devDependancy utility node package to read and the request including headers, custom headers, cookies, and add usufaul property like timestamp  ",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "debug": "tsc src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha 'test/**/*.spec.ts'",
+    "clean": "rm -rf dist",
+    "build": "npm run build:es && npm run build:cj && npm run build:types",
+    "pretest": "npm run build",
+    "prebuild": "npm run clean",
+    "lint": "eslint . --ext .ts",
+    "posttest": "npm run tsc && npm run lint && npm run format:check",
+    "build:es": "tsc --p tsconfig.es.json",
+    "build:cj": "tsc --p tsconfig.cj.json",
+    "build:types": "tsc --p tsconfig.es.json --emitDeclarationOnly",
+    "format": "prettier --log-level warn --write \"**/*.{js,json,md,ts}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md,ts}\"",
+    "tsc": "tsc --noEmit",
+    "prepublishOnly": "npm run test"
   },
   "keywords": [
     "http",
@@ -17,9 +30,29 @@
   "author": "M.Yusuf",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.7",
+    "eslint": "^8.56.0",
+    "mocha": "^10.2.0",
+    "prettier": "^3.1.1",
+    "release-it": "^17.0.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "prettier"
+    ],
+    "parserOptions": {},
+    "ignorePatterns": [
+      "dist/**"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "none"
   }
 }
