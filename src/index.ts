@@ -1,8 +1,13 @@
-import express from 'express';
+import express, { Request } from 'express';
 
 const app = express();
 
-function paresRequestId({ req, customRequestIdHeader }) {
+type RequestInfo = {
+	req: Request;
+	customRequestIdHeader?: string;
+};
+
+export function paresRequestId({ req, customRequestIdHeader }: RequestInfo) {
 	const result = {};
 	result[customRequestIdHeader] = req.headers[customRequestIdHeader] || '';
 	return result;

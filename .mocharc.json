@@ -1,0 +1,13 @@
+{
+	"spec": "test/**/*.spec.js",
+	"extension": ["js"],
+	"inline-diffs ": true,
+	"full-trace": true,
+	"recursive": true,
+	"diff": true,
+	"exit": true,
+	"slow": 300,
+	"retries": 3,
+	"timeout": 15000,
+	"ignore": ["node_modules", "dist", ".devcontainer", ".vscode"]
+}
