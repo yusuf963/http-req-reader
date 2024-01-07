@@ -4,6 +4,7 @@
   "description": "devDependancy utility node package to read and the request including headers, custom headers, cookies, and add usufaul property like timestamp  ",
   "main": "index.ts",
   "scripts": {
+    "debug": "tsc src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,5 +15,11 @@
     "header"
   ],
   "author": "M.Yusuf",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
