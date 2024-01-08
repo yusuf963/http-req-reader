@@ -1,6 +1,6 @@
-import express, { Request } from 'express';
+import { Request } from 'express';
 
-const app = express();
+// const app = express();
 
 type RequestInfo = {
 	req: Request;
@@ -55,24 +55,23 @@ export function requestInfo({ req, customRequestIdHeader }: RequestInfo) {
 		// geolocation,
 	};
 }
+// app.use((req, res, next) => {
+// 	//storeReqToJsonFile(req, 'request-2.json');
+// 	next();
+// });
 
-app.use((req, res, next) => {
-	//storeReqToJsonFile(req, 'request-2.json');
-	next();
-});
+// app.get('/', (req, res) => {
+// 	req.headers['x-req-id'] = 'tgdgh8764hgwghfftThg-098';
+// 	const acceptLanguage = req.headers['accept-language'] || 'en';
 
-app.get('/', (req, res) => {
-	req.headers['x-req-id'] = 'tgdgh8764hgwghfftThg-098';
-	const acceptLanguage = req.headers['accept-language'] || 'en';
+// 	if (acceptLanguage.includes('es')) {
+// 		res.send('<p>Hola</p>');
+// 	} else {
+// 		res.send('<p>Hello</p>');
+// 	}
+// });
 
-	if (acceptLanguage.includes('es')) {
-		res.send('<p>Hola</p>');
-	} else {
-		res.send('<p>Hello</p>');
-	}
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
-	console.log(`Server is running at http://localhost:${PORT}`);
-});
+// const PORT = 3000;
+// app.listen(PORT, () => {
+// 	console.log(`Server is running at http://localhost:${PORT}`);
+// });

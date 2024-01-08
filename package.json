@@ -2,8 +2,9 @@
 	"name": "http-req-reader",
 	"version": "0.0.1",
 	"description": "devDependancy utility node package to read and the request including headers, custom headers, cookies, and add usufaul property like timestamp  ",
-	"main": "index.ts",
-	"type": "module",
+	"main": "dist/cj/src/index.js",
+	"module": "dist/es/src/index.js",
+	"types": "dist/@types/index.d.ts",
 	"scripts": {
 		"debug": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
 		"test": "ts-mocha 'test/**/*.spec.ts'",
@@ -49,5 +50,8 @@
 	},
 	"dependencies": {
 		"express": "^4.18.2"
-	}
+	},
+	"files": [
+		"dist"
+	]
 }
