@@ -7,13 +7,17 @@ type RequestInfo = {
 	customRequestIdHeader?: string;
 };
 
-export function paresRequestId({ req, customRequestIdHeader }: RequestInfo) {
+export function paresCustomRequestId({
+	req,
+	customRequestIdHeader,
+}: RequestInfo) {
+	if (!customRequestIdHeader) return '';
 	const result = {};
 	result[customRequestIdHeader] = req.headers[customRequestIdHeader] || '';
 	return result;
 }
 
-function requestInfo({ req, customRequestIdHeader }) {
+export function requestInfo({ req, customRequestIdHeader }: RequestInfo) {
 	const ip = req.ip || req.connection.remoteAddress;
 	const userAgent = req.get('user-agent');
 	const browser = userAgent.split(' ')[0];
@@ -27,7 +31,7 @@ function requestInfo({ req, customRequestIdHeader }) {
 	const cookies = req.cookies;
 	const headers = req.headers;
 	const languages = req.acceptsLanguages();
-	const customRequestId = paresRequestId({ req, customRequestIdHeader });
+	const customRequestId = paresCustomRequestId({ req, customRequestIdHeader });
 	const os =
 		req.get('sec-ch-ua-platform') + ' ' + req.get('user-agent').split(' ')[1];
 	// const geolocation = geoip.lookup(ip);
@@ -52,17 +56,13 @@ function requestInfo({ req, customRequestIdHeader }) {
 	};
 }
 
-// Example route using the requestInfo function
-// app.get("/", (req, res) => {
-//   const info = requestInfo(req);
-//   res.json(info);
-// });
+app.use((req, res, next) => {
+	//storeReqToJsonFile(req, 'request-2.json');
+	next();
+});
 
 app.get('/', (req, res) => {
 	req.headers['x-req-id'] = 'tgdgh8764hgwghfftThg-098';
-	const info = requestInfo({ req, customRequestIdHeader: 'x-req-id' });
-	console.log('INFO:--->', info);
-	// Simulate content negotiation based on Accept-Language header
 	const acceptLanguage = req.headers['accept-language'] || 'en';
 
 	if (acceptLanguage.includes('es')) {

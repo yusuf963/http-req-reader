@@ -25,7 +25,8 @@
 		"comma-dangle": 0,
 		"linebreak-style": ["error", "unix"],
 		"quotes": ["warn", "single"],
-		"semi": ["warn", "always"]
+		"semi": ["warn", "always"],
+		"@typescript-eslint/no-unused-vars": "warn"
 	},
 	"ignorePatterns": ["dist/**"]
 }
