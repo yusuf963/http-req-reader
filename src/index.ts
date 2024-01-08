@@ -1,23 +1,15 @@
-import { Request } from 'express';
-
-// const app = express();
-
-type RequestInfo = {
-	req: Request;
-	customRequestIdHeader?: string;
-};
-
+import { RequestInfo, RequestInfoParams } from './types';
 export function paresCustomRequestId({
 	req,
 	customRequestIdHeader,
-}: RequestInfo) {
+}: RequestInfoParams) {
 	if (!customRequestIdHeader) return '';
 	const result = {};
 	result[customRequestIdHeader] = req.headers[customRequestIdHeader] || '';
 	return result;
 }
 
-export function requestInfo({ req, customRequestIdHeader }: RequestInfo) {
+export function requestInfo({ req, customRequestIdHeader }: RequestInfoParams): RequestInfo {
 	const ip = req.ip || req.connection.remoteAddress;
 	const userAgent = req.get('user-agent');
 	const browser = userAgent.split(' ')[0];
@@ -55,23 +47,3 @@ export function requestInfo({ req, customRequestIdHeader }: RequestInfo) {
 		// geolocation,
 	};
 }
-// app.use((req, res, next) => {
-// 	//storeReqToJsonFile(req, 'request-2.json');
-// 	next();
-// });
-
-// app.get('/', (req, res) => {
-// 	req.headers['x-req-id'] = 'tgdgh8764hgwghfftThg-098';
-// 	const acceptLanguage = req.headers['accept-language'] || 'en';
-
-// 	if (acceptLanguage.includes('es')) {
-// 		res.send('<p>Hola</p>');
-// 	} else {
-// 		res.send('<p>Hello</p>');
-// 	}
-// });
-
-// const PORT = 3000;
-// app.listen(PORT, () => {
-// 	console.log(`Server is running at http://localhost:${PORT}`);
-// });
