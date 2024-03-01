@@ -7,26 +7,35 @@ const sandbox = sinon.createSandbox();
 
 describe('paresRequestId function', () => {
 	sandbox.stub(console, 'error');
-	it('return an object with the header name passed to customRequestIdHeader property', () => {
+	it('return an object with the header name passed to customRequesdHeader property', () => {
 		const req = {} as Request;
 
-		req.headers = { 'x-req-id': '123-some-chars-req-id' };
+		req.headers = {
+			'x-req-id': '123-some-chars-req-id',
+			'x-req-cookie': '123-some-chars-req-cookie',
+			'x-req-vary': '123-some-vary-val',
+		};
 
 		const headerNameAndValue = paresCustomRequestId({
 			req,
-			customRequestIdHeader: 'x-req-id',
+			customRequestHeader: ['x-req-id', 'x-req-cookie', 'x-req-vary'],
 		});
 		assert.deepEqual(headerNameAndValue, {
 			'x-req-id': '123-some-chars-req-id',
+			'x-req-cookie': '123-some-chars-req-cookie',
+			'x-req-vary': '123-some-vary-val',
 		});
 	});
 
-	it('return empty string vlaue if no customRequestIdHeader passed in', () => {
+	it('return error message vlaue if no customRequestHeader passed in', () => {
 		const req = {
 			headers: {},
 		} as Request;
-		const headerNameAndValue = paresCustomRequestId({ req });
-		assert.deepEqual(headerNameAndValue, '');
+		const headerNameAndValue = paresCustomRequestId({
+			req,
+			customRequestHeader: [],
+		});
+		assert.deepEqual(headerNameAndValue, 'No custom request header passed in');
 	});
 });
 
@@ -58,15 +67,15 @@ describe('requestInfo function', () => {
 
 			const result = requestInfo({
 				req,
-				customRequestIdHeader: 'custom-header',
+				customRequestHeader: ['custom-header'],
 			});
 			result.timestamp = '08/01/2024, 01:01:28';
 
 			assert.equal(typeof result, 'object');
 			assert.strictEqual(Object.keys(result).length, 15);
 			assert.deepStrictEqual(result, {
-				timestamp: '08/01/2024, 01:01:28', // !!better to be asserted as sinon.match.string of instamce of Date
-				customRequestId: { 'custom-header': 'custom-value' },
+				timestamp: '08/01/2024, 01:01:28', // !!better to be asserted as sinon.match.string of instance of Date
+				customRequestHeaders: { 'custom-header': 'custom-value' },
 				languages: ['en-US'],
 				protocol: 'http',
 				method: 'GET',

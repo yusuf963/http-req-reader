@@ -8,6 +8,9 @@ import { requestInfo } from 'http-req-reader';
 
 ...
 // preferebly right after request object available
- console.log(requestInfo({req, customRequestIdHeader:'x-my-req-id-header'}))
+requestInfo({req, customRequestIdHeader:['x-my-req-id-header']})
 
 ```
+
+consider this "module": "dist/es/src/index.js", // dist/index.mjs
+https://www.youtube.com/watch?v=xnfdm-s8adI
